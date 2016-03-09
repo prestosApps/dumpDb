@@ -1,8 +1,8 @@
 import os
 import sqlite3
 
-db_filename = '/var/lib/dumpTest/dump1090.db'
-schema_filename = '/usr/local/bin/dumpTest/schema.sql'
+db_filename = '/var/lib/dumpDb/dump1090.db'
+schema_filename = '/usr/local/bin/dumpDb/schema.sql'
 
 db_is_new = not os.path.exists(db_filename)
 

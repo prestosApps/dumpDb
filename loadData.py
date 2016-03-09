@@ -11,7 +11,7 @@ data = json.load(response)
 history = receiverData.get('history',0)
 print "Receiver History: ", history
 
-conn = sqlite3.connect('/var/lib/dumpTest/dump1090.db')
+conn = sqlite3.connect('/var/lib/dumpDb/dump1090.db')
 cursor = conn.cursor()
 
 for i in range(history):
