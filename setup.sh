@@ -3,7 +3,7 @@
 sudo mkdir /usr/local/bin/dumpDb
 sudo mkdir /var/lib/dumpDb
 
-cd ~/dump1090
+cd ~/dumpDb
 sudo cp * /usr/local/bin/dumpDb
 
 cd /usr/local/bin/dumpDb
