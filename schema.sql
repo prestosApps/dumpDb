@@ -1,4 +1,5 @@
 create table aircraft(
+    _id INTEGER PRIMARY KEY,
     hexcode TEXT,
     squawk TEXT,
     flight TEXT,
