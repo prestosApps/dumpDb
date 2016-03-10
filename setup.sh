@@ -11,4 +11,4 @@ sudo rm setup.sh
 
 sudo python /usr/local/bin/dumpDb/databaseSetup.py
 
-(sudo crontab -l 2>/dev/null; echo -e "0 * * * * /usr/local/bin/dumpDb/loadData.py\n") | sudo crontab -
+(sudo crontab -l 2>/dev/null; echo -e "0 * * * * sudo python /usr/local/bin/dumpDb/loadData.py\n") | sudo crontab -
