@@ -1,6 +1,8 @@
 import json
 import sqlite3
 import urllib2
+import datetime
+import time
 
 receiver = urllib2.urlopen('http://192.168.1.79/dump1090/data/receiver.json')
 response = urllib2.urlopen('http://192.168.1.79/dump1090/data/aircraft.json')
@@ -32,7 +34,30 @@ for i in range(history):
 #Remove duplicate entries from the database
 print 'Deleting duplicates...'
 cursor.execute("delete from aircraft where _id not in(select min(_id) from aircraft group by hexcode, squawk, flight, lat, lon, altitude, vertRate, track, speed, messages, rssi)")    
+conn.commit()
+
+#Get basic stats data
+cursor.execute('select count(distinct(hexcode)) from aircraft')
+totalAircraftSeen = cursor.fetchone()[0]
+cursor.execute('delete from stats')
+
+epoch = datetime.datetime(1970,1,1)
+today = datetime.date.today()
+todayStart = datetime.datetime.combine(today, datetime.time.min)
+todayEnd = datetime.datetime.combine(today, datetime.time.max)
+
+start = (todayStart - epoch).total_seconds()
+end = (todayEnd - epoch).total_seconds()
+
+cursor.execute('select count(distinct(hexcode)) from aircraft where timeSeen between ? and ?', (start, end))
+aircraftSeenToday = cursor.fetchone()[0]
+print aircraftSeenToday
+
+updateTime = datetime.datetime.now().strftime('%d/%m/%Y %H:%M')
+
+cursor.execute('insert into stats (totalAircraftSeen, aircraftSeenToday, lastUpdated) values (?,?,?)', (totalAircraftSeen, aircraftSeenToday,updateTime,))
 
 conn.commit()
+
 conn.close()
 print 'Done...'

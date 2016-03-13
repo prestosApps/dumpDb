@@ -14,3 +14,11 @@ create table aircraft(
     timeSeen INT,
     rssi REAL
 );
+
+create table stats(
+    _id INTEGER PRIMARY KEY,
+    aircraftSeenToday INT,
+    totalAircraftSeen INT,
+    lastUpdated TEXT
+);
+

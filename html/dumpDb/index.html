@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+    <title>DumpDb</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            width:80%;
+            margin:auto;
+        }
+        .header{
+            text-align: center;
+            background-color: #6a8df2;
+            color: #ffffff;
+            padding: 4px;
+            border-radius:8px;
+            margin-top:16px;
+        }
+        .panel{
+            background-color: #eeeeee;
+            border-style: solid;
+            border-width: 1px;
+            border-color: #dddddd;
+            border-radius:4px;
+        }
+        .panel-header{
+            font-weight: bold;
+            padding: 4px;
+            background-color: #dddddd;
+        }
+        .panel-row{
+        }
+    </style>
+</head>
+<body>
+    <script src="external/jquery/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+               url: "http://192.168.1.245/cgi-bin/test.py",
+               type: "GET",
+               dataType: "text",
+               success: function(response){
+                   responseArray = response.split(",");
+                   $("#totalSoFar").text(responseArray[0]);
+                   $("#aircraftSeenToday").text(responseArray[1]);
+                   $("#lastUpdated").text(responseArray[2]);
+               }
+            });
+        });
+    </script>
+    <div class="header">
+        <h1>DumpDb</h1>
+    </div>
+
+    <div class="panel" style="float:left; width:70%;margin-top:16px;">
+        <div class="panel-header">
+            Aircraft Data
+        </div>
+        <div class="panel-row" style="padding:20px;">
+            <div style="float:left; font-size:1.25em; width:30%">
+                Aircraft seen today:
+            </div>
+            <div style="font-size: 2.5em;" id="aircraftSeenToday">
+            </div>
+        </div>
+        <div class="panel-row" style="padding:20px;">
+            <div style="float:left; font-size:1.25em; width:30%;">
+                Total aircraft seen so far:
+            </div>
+            <div style="font-size: 2.5em;" id="totalSoFar">
+            </div>
+        </div>
+        <div class="panel-row" style="padding-left:20px; padding-bottom:4px;">
+            <div style="float:left; font-size:0.75em; float:left;">
+                Last updated:
+            </div>
+            <div style="font-size: 0.75em;" id="lastUpdated">
+            </div>
+        </div>
+    </div>
+
+    <div class="panel" style="float: right; width:25%;margin-top:16px;">
+        <div class="panel-header">
+            Status
+        </div>
+        <div class="panel-row" style="padding:20px;">
+            Content
+        </div>
+    </div>
+
+</body>
+</html>
+
