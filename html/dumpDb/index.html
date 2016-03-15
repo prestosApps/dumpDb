@@ -47,6 +47,18 @@
                    $("#lastUpdated").text(responseArray[2]);
                }
             });
+
+            $.ajax({
+               url: "http://192.168.1.245/cgi-bin/status.py",
+               type: "GET",
+               dataType: "text",
+               success: function(response){
+                   responseArray = response.split(",");
+                   $("#dump1090Info").text("Dump1090 " + responseArray[0]);
+                   $("#dump1090Uptime").text("Running since: " + responseArray[1]);
+                   $("#imgDiv").prepend('<img src="images/tick.png"/>');
+               }
+            });
         });
     </script>
     <div class="header">
@@ -72,7 +84,7 @@
             </div>
         </div>
         <div class="panel-row" style="padding-left:20px; padding-bottom:4px;">
-            <div style="float:left; font-size:0.75em; float:left;">
+            <div style="float:left; font-size:0.75em;">
                 Last updated:
             </div>
             <div style="font-size: 0.75em;" id="lastUpdated">
@@ -84,8 +96,13 @@
         <div class="panel-header">
             Status
         </div>
-        <div class="panel-row" style="padding:20px;">
-            Content
+        <div style="padding:4px;">
+            <div style="width:10%; float:left;" id="imgDiv">
+            </div>
+            <div style="width:90%; float:right;">
+                <div id="dump1090Info"></div>
+                <div style="font-size:0.75em;" id="dump1090Uptime"></div>
+            </div>
         </div>
     </div>
 
