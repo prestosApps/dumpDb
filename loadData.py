@@ -29,7 +29,7 @@ for i in range(history):
             mlat = 0
         else:
             mlat = 1
-        cursor.execute("insert into aircraft values (null,?,?,?,?,?,?,?,?,?,?,?,?,?)", (a.get('hex',''), a.get('squawk',''), a.get('flight',''), a.get('lat',0), a.get('lon',0), a.get('altitude',0), a.get('vertRate',0), a.get('track',0), a.get('speed',0), a.get('messages',0), mlat, historyJson.get('now',0), a.get('rssi',0)))
+        cursor.execute("insert into aircraft values (null,?,?,?,?,?,?,?,?,?,?,?,?,?)", (a.get('hex',''), a.get('squawk',''), a.get('flight',''), a.get('lat',0), a.get('lon',0), a.get('altitude',0), a.get('vert_rate',0), a.get('track',0), a.get('speed',0), a.get('messages',0), mlat, historyJson.get('now',0), a.get('rssi',0)))
 
 #Remove duplicate entries from the database
 print 'Deleting duplicates...'
